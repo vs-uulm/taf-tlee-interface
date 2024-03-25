@@ -1,0 +1,127 @@
+[
+    {
+        "ID": "VC",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "1",
+                "Target": "ZC2"
+            },
+            {
+                "ID": "2",
+                "Target": "ZC2"
+            },
+            {
+                "ID": "3",
+                "Target": "ZC2"
+            },
+            {
+                "ID": "4",
+                "Target": "ZC5"
+            }
+        ]
+    },
+    {
+        "ID": "ZC2",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "5",
+                "Target": "ZC1"
+            },
+            {
+                "ID": "6",
+                "Target": "ZC1"
+            },
+            {
+                "ID": "7",
+                "Target": "ZC1"
+            }
+        ]
+    },
+    {
+        "ID": "ZC1",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "8",
+                "Target": "C"
+            },
+            {
+                "ID": "9",
+                "Target": "C"
+            },
+            {
+                "ID": "10",
+                "Target": "L"
+            }
+        ]
+    },
+    {
+        "ID": "C",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "11",
+                "Target": "G"
+            },
+            {
+                "ID": "12",
+                "Target": "Cdata"
+            }
+        ]
+    },
+    {
+        "ID": "L",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "13",
+                "Target": "Ldata"
+            }
+        ]
+    },
+    {
+        "ID": "G",
+        "Operator": "cumulativeFusion"
+    },
+    {
+        "ID": "Cdata",
+        "Operator": "cumulativeFusion"
+    },
+    {
+        "ID": "Ldata",
+        "Operator": "cumulativeFusion"
+    },
+    {
+        "ID": "ZC5",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "14",
+                "Target": "R"
+            }
+        ]
+    },
+    {
+        "ID": "R",
+        "Operator": "cumulativeFusion",
+        "Relations":
+        [
+            {
+                "ID": "15",
+                "Target": "Rdata"
+            }
+        ]
+    },
+    {
+        "ID": "Rdata",
+        "Operator": "cumulativeFusion"
+    }
+]

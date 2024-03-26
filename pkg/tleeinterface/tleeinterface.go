@@ -1,8 +1,8 @@
-package tlee
+package tleeinterface
 
 import (
-	subjectivelogic "gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/subjectivelogic"
-	"gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/trustmodelstructure"
+	subjectivelogic "github.com/vs-uulm/taf-tlee-interface/pkg/subjectivelogic"
+	"github.com/vs-uulm/taf-tlee-interface/pkg/trustmodelstructure"
 )
 
 func RunTLEE(trustmodelID string, version int, fingerprint uint32, structure trustmodelstructure.Structure, values map[string]subjectivelogic.Opinion) map[string]subjectivelogic.Opinion {

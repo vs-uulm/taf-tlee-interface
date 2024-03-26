@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/testsetgenerator"
-	"gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/tlee"
+	"github.com/vs-uulm/taf-tlee-interface/pkg/testsetgenerator"
+	"github.com/vs-uulm/taf-tlee-interface/pkg/tleeinterface"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 
 	// Print results
 	fmt.Println("Results:")
-	for key, value := range tlee.RunTLEE(testSet.TrustmodelID, testSet.Version, testSet.Fingerprint, testSet.Structure, testSet.Values) {
+	for key, value := range tleeinterface.RunTLEE(testSet.TrustmodelID, testSet.Version, testSet.Fingerprint, testSet.Structure, testSet.Values) {
 		fmt.Printf("%s: %s\n", key, value.ToString())
 		fmt.Printf("Sum of belief, disbelief, and uncertainty: %f\n", value.Belief+value.Disbelief+value.Uncertainty)
 	}

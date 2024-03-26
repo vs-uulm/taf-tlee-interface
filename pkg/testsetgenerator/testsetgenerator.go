@@ -16,8 +16,8 @@ import (
 	"strings"
 	"time"
 
-	"gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/subjectivelogic"
-	"gitlab-vs.informatik.uni-ulm.de/connect/tlee-interface/pkg/trustmodelstructure"
+	"github.com/vs-uulm/taf-tlee-interface/pkg/subjectivelogic"
+	"github.com/vs-uulm/taf-tlee-interface/pkg/trustmodelstructure"
 )
 
 // TestSet provides all parameters relevant for calling the TLEE

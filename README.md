@@ -1,53 +1,37 @@
 # TLEE Interface
 
-Interface for testing TLEE functionality.
+Interface for defining TLEE/TAF interface.
 
-## Testing a TLEE implementation
+## Implementing the Interfaces
 
-**In order to test a TLEE implementation, simply replace the TLEE placeholder with an actual TLEE implementation.** 
-This can be done in several ways:
-1. Replace the logic inside the *RunTLEE* function in the *tlee* package (Especially suitable for testing very simple, minimalistic TLEE implementations). 
-2. Replace the *tlee* package with another tlee package that implements the *RunTLEE* function.
+As Go interfaces are implemented implicitly, the following steps would be necessary to get the interface running:
 
-However, the *RunTLEE* function is required to have the following signature:
-```go
-func RunTLEE(trustmodelID string, version int, fingerprint uint32, structure trustmodelstructure.Structure, values map[string]subjectivelogic.Opinion) map[string]float64
+Add this module to the project in which the TLEE is implemented. Given the fact that the module is not published under its name, you can do so by checking out this repository next to the tlee-implementation: 
 
 ```
+.
+├── tlee-implementation
+└── tlee-interface
+```
 
-## How it works
+Then, use the following code in the `go.mod` file of your tlee-implementation project:
+```
+replace (
+	github.com/vs-uulm/taf-tlee-interface => ../tlee-interface
+)
+```
 
-In `main.go`, three test sets are created to call the *RunTLEE* function with. The values returned by the *RunTLEE* function are currently not inspected automatically, but only printed to console.
- 
-### trust model ID and version
-The trust model ID and the version are random values. The trust model ID is based on a timestamp in order to provide uniqueness.
+This will now allow you to access the packages `tleeinterface` and `trustmodelstructure` from within your code.
 
-### fingerprint
-The fingerprint is based on the trust model structure topology. The relations in the corresponding trust model structure are expressed in the form "source,target,relationID". These relation strings are then sorted alphabetically and concatenated into a single string, which is then hashed.
+Next, you need to add functions to your structs so they will implicitly implement the interfaces. 
+This will probably include the following:
 
-### trust model structures
-The trust model structures used in these test sets are currently hardcoded.
+| Generic Interface in tlee-interface                            | Struct in tlee-implementation |
+|----------------------------------------------------------------| -- |
+| `trustmodelstructure.TrustGraphStructure`                      |  `StructureGraphTAFMultipleProp` |
+| `trustmodelstructure.AdjacencyListEntry`                       |  `VertexEdgeDTO` |
+| `trustmodelstructure.TrustRelationship`                        |  `OpinionDTO` |
+| `subjectivelogic.QueryableOpinion` from [go-subjectivelogic](https://github.com/vs-uulm/go-subjectivelogic/blob/0eed3084529279af0be08f5bc0de270f3028ae7b/pkg/subjectivelogic/Opinion.go#L44) |  `OpinionDTOValue` |
 
-### values (trust opinions)
-For each relation in the corresponding trust model structure, a random trust opinion is generated.
-
-
-
-## *trustmodelstructure* package
-
-Provides data structures and methods to represent and manipulate the structure of trust models.
-This package **does not contain trust opinions**, but mainly the structure properties of trust models.
-
-### Objects
-Objects represent trust objects of a trust model structure. Each object has a unique identifier, a list of relations to other objects, and an operator string to optionally define an operator used for fusing associated trust opinions.
-
-### Relations
-Relations represent the trust relations one trust object has to another. Each relation specifies an unique identifyer and its target objects identifyer.
-
-### Structure
-The Structure type is a list of trust objects. It provides methods to convert the structure to a string, and to get partial trust model structures per leaf node object.
-
-
-## *subjectivelogic* package
-
-Provides data structure to represent a subjective logic opinion as defined by [Audun Josang](https://link.springer.com/book/10.1007/978-3-319-42337-1).
+Furthermore, you will need to adapt your code to handle the input parameters that it will no longer by the structs on the right side that are used, but rather the interfaces from left side.
+Alternatively, you can implement some wrapper code that converts the interface-typed inputs into your own internal DTOs at the beginning of the `RunTLEE()` implementation.

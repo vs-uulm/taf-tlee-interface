@@ -1,18 +1,13 @@
 package trustmodelstructure
 
-// Structure represents a trust model structure
-type Structure []Object
+// A TrustGraphStructure defines the graph-structural properties of a trust model. It does not define scopes, as scopes are only defined for the values of a graph (i.e., trust opinions)
+type TrustGraphStructure interface {
+	getOperator() string
+	getAdjacencyList() []AdjacencyListEntry
+}
 
-// Returns a string representation of the trust model structure in the format of
-// "objectID -> targetID, targetID, ..."
-func (s Structure) ToString() string {
-	var str string
-	for _, object := range s {
-		str += object.ID + " -> "
-		for _, relation := range object.Relations {
-			str += relation.Target + ", "
-		}
-		str += "\n"
-	}
-	return str
+// A AdjacencyListEntry defines all outgoing edges of a source node by listing the corresponding target nodes of these edges.
+type AdjacencyListEntry interface {
+	getSourceNode() string
+	getTargetNodes() []string
 }

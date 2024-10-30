@@ -8,4 +8,5 @@ const (
 	CumulativeFusion
 	WeightedFusion
 	ConsensusAndCompromiseFusion
+	NoFusion
 )

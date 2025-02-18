@@ -9,4 +9,5 @@ const (
 	WeightedFusion
 	ConsensusAndCompromiseFusion
 	NoFusion
+	ImpactFusion
 )
